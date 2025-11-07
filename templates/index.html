@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+  body {
+      background: #f5f6fa;
+  }
+
+  .home-wrapper {
+      max-width: 750px;
+      margin: 40px auto;
+      background: white;
+      padding: 32px;
+      border-radius: 12px;
+      border: 1px solid #e5e5e5;
+  }
+
+  h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #0f172a;
+  }
+
+  .subtitle {
+      color: #475569;
+      margin-bottom: 20px;
+      font-size: 16px;
+  }
+
+  .btn-row {
+      margin-top: 26px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+  }
+
+  .btn-main {
+      background: #2563eb;
+      color: white;
+      padding: 12px 18px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(0,0,0,.15);
+  }
+
+  .btn-main:hover { background: #1e4fc9; }
+
+  .btn-secondary {
+      background: #e2e8f0;
+      color: #1e293b;
+      padding: 12px 18px;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+  }
+
+  .btn-secondary:hover { background: #cbd5e1; }
+
+  .block {
+      margin-top: 28px;
+      padding: 18px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+  }
+
+  .block h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #1e293b;
+  }
+
+  ul {
+      padding-left: 18px;
+      color: #475569;
+      font-size: 15px;
+  }
+
+  footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #94a3b8;
+      font-size: 13px;
+  }
+
+  @media(max-width: 600px){
+      .home-wrapper{
+        padding: 22px;
+      }
+      h1{ font-size: 24px; }
+  }
+</style>
+
+
+<div class="home-wrapper">
+
+  <h1>Surplus food</h1>
+  <div class="subtitle">
+      A simple AI-assisted platform to connect food donors with recipients.
+  </div>
+
+  <div class="btn-row">
+      <a href="/register" class="btn-main">Register</a>
+      <a href="/login" class="btn-secondary">Login</a>
+  </div>
+
+  <div class="btn-row">
+    <a href="/admin-login" class="btn-secondary" style="background:#f1f5f9;">Admin Login</a>
+</div>
+
+  <div class="block">
+      <h3>What We Do</h3>
+      <ul>
+          <li>Match surplus food from donors to recipients.</li>
+          <li>Support only Belagavi District (all taluks).</li>
+          <li>Classify Veg / Non-Veg donations.</li>
+          <li>Assign vehicle routes for delivery.</li>
+          <li>Track status (Assigned → En-route → Delivered).</li>
+      </ul>
+  </div>
+
+  <div class="block">
+      <h3>Who Can Use?</h3>
+      <ul>
+          <li>Restaurants, events, mess halls, individuals (Donors)</li>
+          <li>NGOs, shelters, community centers (Recipients)</li>
+      </ul>
+  </div>
+</div>
+
+<footer>
+    ©  surplus food distribution
+</footer>
+
+{% endblock %}

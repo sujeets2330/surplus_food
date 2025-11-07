@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Admin Dashboard</h2>
+
+<!-- Flash Message -->
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="popup">{{ messages[0] }}</div>
+  {% endif %}
+{% endwith %}
+
+<!-- SUMMARY CARDS -->
+<div class="summary-row">
+    <div class="summary-card"><h3>{{ donations|length }}</h3><p>Open Donations</p></div>
+    <div class="summary-card"><h3>{{ requests|length }}</h3><p>Open Requests</p></div>
+    <div class="summary-card"><h3>{{ vehicles|length }}</h3><p>Available Vehicles</p></div>
+    <div class="summary-card"><h3>{{ matches|length }}</h3><p>Total Matches</p></div>
+</div>
+
+<br>
+
+<!-- OPEN DONATIONS -->
+<h3>Open Donations</h3>
+{% if donations %}
+<table class="nice-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Meals</th>
+            <th>Donor</th>
+            <th>Match</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for d in donations %}
+        <tr>
+            <td>#{{ d.id }}</td>
+            <td>{{ d.title }}</td>
+            <td>{{ d.quantity_meals }}</td>
+            <td>{{ d.donor_email }}</td>
+            <td>
+                <form method="post" action="/match/{{ d.id }}">
+                    <select name="request_id" required>
+                        {% for r in requests %}
+                            <option value="{{ r.id }}">Req #{{ r.id }} ({{ r.need_meals }} meals)</option>
+                        {% endfor %}
+                    </select>
+                    <button class="btn btn-green">Match</button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No open donations.</p>
+{% endif %}
+
+<br><br>
+
+<!-- ACTIVE MATCHES -->
+<h3>Active Matches</h3>
+{% if matches %}
+<table class="nice-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Donation</th>
+            <th>Request</th>
+            <th>Score</th>
+            <th>Vehicle</th>
+            <th>Update</th>
+            <th>Status</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% for m in matches %}
+        <tr>
+            <td>#{{ m.id }}</td>
+            <td>#{{ m.donation_id }}</td>
+            <td>#{{ m.request_id }}</td>
+            <td>{{ m.score }}</td>
+
+            <!-- Vehicle -->
+            <td>
+                {% if not m.vehicle_id %}
+                <form method="post" action="/assign/{{ m.id }}">
+                    <select name="vehicle_id">
+                        {% for v in vehicles %}
+                            <option value="{{ v.id }}">{{ v.name }} ({{ v.capacity_meals }} meals)</option>
+                        {% endfor %}
+                    </select>
+                    <button class="btn btn-blue">Assign</button>
+                </form>
+                {% else %}
+                     Vehicle #{{ m.vehicle_id }}
+                {% endif %}
+            </td>
+
+            <!-- Update -->
+            <td>
+                <form method="post" action="/status/{{ m.id }}">
+                    <select name="status">
+                        <option value="assigned">Assigned</option>
+                        <option value="enroute">En Route</option>
+                        <option value="delivered">Delivered</option>
+                    </select>
+                    <button class="btn btn-yellow">Update</button>
+                </form>
+            </td>
+
+            <!-- Status Column (LIVE STATUS) -->
+            <td>
+                {% if m.status == "assigned" %}
+                    <span class="status assigned">Assigned</span>
+                {% elif m.status == "enroute" %}
+                    <span class="status enroute">En Route</span>
+                {% elif m.status == "delivered" %}
+                    <span class="status delivered">Delivered</span>
+                {% else %}
+                    <span class="status pending">Pending</span>
+                {% endif %}
+            </td>
+
+            <!-- Delete -->
+            <td>
+                {% if m.status == "delivered" %}
+                    <form method="post" action="/delete/{{ m.id }}">
+                        <button class="btn btn-red">Delete</button>
+                    </form>
+                {% else %}
+                    -
+                {% endif %}
+            </td>
+
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% else %}
+<p>No matches created yet.</p>
+{% endif %}
+
+{% endblock %}

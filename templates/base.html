@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+   
+
+    <title>Surplus - Food Distribution AI</title>
+     <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+
+<body>
+
+<div class="navbar">
+    <div>
+        <a href="/"> surplus food distribution</a>
+    </div>
+    <div>
+        <a href="/portal">Portal</a>
+        <a href="/dashboard">Admin</a>
+        <a href="/logout">Logout</a>
+    </div>
+</div>
+
+<div class="container">
+    {% with msgs = get_flashed_messages() %}
+    {% if msgs %}
+        {% for m in msgs %}
+            <p style="background:#d1e7dd;color:#0f5132;padding:10px;border-radius:5px;">{{m}}</p>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+</div>
+
+</body>
+</html>

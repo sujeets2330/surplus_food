@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Welcome {{ user.name }}</h2>
+
+{% if user.role == "donor" %}
+    <a class="btn" href="/donate-page">Make Donation</a>
+{% else %}
+    <a class="btn" href="/request-page">Request Food</a>
+{% endif %}
+
+<h3>Your Activity</h3>
+
+{% if activity %}
+<table>
+    <tr>
+        <th>Type</th>
+        <th>Details</th>
+        <th>Status</th>
+    </tr>
+
+    {% for a in activity %}
+    <tr>
+        <td>{{ a.type }}</td>
+        <td>{{ a.details }}</td>
+        <td>{{ a.status }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No activity yet.</p>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Donate Food</h2>
+
+<form method="post" action="/donate">
+
+    <label>Title<br>
+        <input name="title" required>
+    </label><br><br>
+
+    <label>Description<br>
+        <textarea name="description"></textarea>
+    </label><br><br>
+
+    <label>Food Type<br>
+        <select name="is_veg">
+            <option value="true">Vegetarian</option>
+            <option value="false">Non-Vegetarian</option>
+        </select>
+    </label><br><br>
+
+    <label>Quantity (meals)<br>
+        <input type="number" name="quantity" required>
+    </label><br><br>
+
+    <label>Ready By<br>
+        <input type="datetime-local" name="ready_by" required>
+    </label><br><br>
+
+    <label>Expires By<br>
+        <input type="datetime-local" name="expire_by" required>
+    </label><br><br>
+
+    <button class="btn">Submit Donation</button>
+</form>
+
+{% endblock %}

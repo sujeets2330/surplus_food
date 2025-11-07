@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Request Food</h2>
+
+<form method="post" action="/request-food">
+
+    <label>Meals Needed<br>
+        <input type="number" name="need_meals" required>
+    </label><br><br>
+
+    <label>Veg Preference<br>
+        <select name="prefers_veg">
+            <option value="true">Vegetarian</option>
+            <option value="false">Non-Vegetarian</option>
+        </select>
+    </label><br><br>
+
+    <label>Earliest Time<br>
+        <input type="datetime-local" name="earliest" required>
+    </label><br><br>
+
+    <label>Latest Acceptable Time<br>
+        <input type="datetime-local" name="latest" required>
+    </label><br><br>
+
+    <button class="btn">Submit Request</button>
+</form>
+
+{% endblock %}

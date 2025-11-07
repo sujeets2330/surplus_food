@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+  body {
+      background: #f5f6fa;
+  }
+
+  .reg-box {
+      max-width: 520px;
+      margin: 40px auto;
+      background: white;
+      padding: 32px;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+  }
+
+  h2 {
+      text-align: center;
+      margin-bottom: 18px;
+      font-size: 26px;
+      font-weight: 700;
+      color: #1e293b;
+  }
+
+  label {
+      display: block;
+      margin-bottom: 14px;
+      color: #334155;
+      font-weight: 600;
+      font-size: 14px;
+  }
+
+  input, select, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      margin-top: 6px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 15px;
+      background: white;
+  }
+
+  textarea { resize: none; }
+
+  input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, .15);
+  }
+
+  .row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+  }
+
+  .btn-register {
+      width: 100%;
+      margin-top: 12px;
+      padding: 12px;
+      background: #2563eb;
+      color: white;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 15px;
+      box-shadow: 0 2px 6px rgba(0,0,0,.1);
+  }
+
+  .btn-register:hover {
+      background: #1e4fc9;
+  }
+
+  .alt-link {
+      margin-top: 14px;
+      text-align: center;
+      font-size: 14px;
+      color: #475569;
+  }
+
+  .alt-link a {
+      color: #2563eb;
+      font-weight: 600;
+      text-decoration: none;
+  }
+
+  .alt-link a:hover { text-decoration: underline; }
+
+  fieldset {
+      border: 1px solid #e2e8f0;
+      padding: 16px;
+      margin-top: 16px;
+      border-radius: 8px;
+  }
+
+  legend {
+      padding: 0 6px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1e293b;
+  }
+</style>
+
+
+<div class="reg-box">
+    <h2>Create Your Account</h2>
+
+    <form method="post">
+
+        <label>Name
+            <input name="name" required>
+        </label>
+
+        <label>Mobile Number
+            <input name="phone" required>
+        </label>
+
+        <label>Email (Login ID)
+            <input name="email" type="email" required>
+        </label>
+
+        <label>Password
+            <input name="password" type="password" required>
+        </label>
+
+        <div class="row">
+            <label style="flex:1;">
+                Role
+                <select name="role" required>
+                    <option value="donor">Donor</option>
+                    <option value="recipient">Recipient</option>
+                </select>
+            </label>
+
+            <label style="flex:1;">
+                Veg Preference
+                <select name="prefers_veg">
+                    <option value="true">Vegetarian</option>
+                    <option value="false">Non-Vegetarian</option>
+                </select>
+            </label>
+        </div>
+
+        <fieldset>
+            <legend>Address</legend>
+
+            <label>State
+                <input name="state" value="Karnataka" readonly>
+            </label>
+
+            <label>District
+                <input name="district" value="Belagavi" readonly>
+            </label>
+
+            <label>Taluk
+                <select name="taluk" required>
+                    <option value="Belagavi">Belagavi</option>
+                    <option value="Gokak">Gokak</option>
+                    <option value="Khanapur">Khanapur</option>
+                    <option value="Ramdurg">Ramdurg</option>
+                    <option value="Saundatti">Saundatti</option>
+                    <option value="Bailhongal">Bailhongal</option>
+                    <option value="Athani">Athani</option>
+                    <option value="Chikkodi">Chikkodi</option>
+                    <option value="Raibag">Raibag</option>
+                    <option value="Hukkeri">Hukkeri</option>
+                </select>
+            </label>
+
+            <label>Pincode
+                <input name="pincode" placeholder="5900xx" required>
+            </label>
+
+            <label>Full Address (House No, Street, Landmark)
+                <textarea name="address" rows="3" required></textarea>
+            </label>
+        </fieldset>
+
+        <button class="btn-register">Create Account</button>
+
+    </form>
+
+    <div class="alt-link">
+        Already have an account? <a href="/login">Login</a>
+    </div>
+</div>
+
+{% endblock %}
